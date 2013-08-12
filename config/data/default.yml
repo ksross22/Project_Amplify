@@ -7,7 +7,7 @@ registration_page:
   number: ~phone_number
 login_page:
   email: ksross22@gmail.com
-  password: asdQWE123
+  password: g2yqqj1n5w
 password_page:
   old_password: g2yqqj1n5w
   new_password: ~characters(character_count = 10)

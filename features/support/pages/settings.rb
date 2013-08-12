@@ -157,11 +157,11 @@ class SettingsPage
   	#turn on/off show scores for every question (excel)
   	def choose_excel_scores(option)
   		if option == 'yes'
-  			if @browser.div(:class => 'switch-off', :index => 0).exists?
+  			if @browser.div(:class => 'switch has-switch', :index => 0).div(:class => 'switch-off').exists?
   				@browser.span(:class => 'switch-left', :index => 0).click
   			end
   		elsif option == 'no'
-  			if @browser.div(:class => 'switch-on', :index => 0).exists?
+  			if @browser.div(:class => 'switch has-switch', :index => 0).div(:class => 'switch-on').exists?
   				@browser.span(:class => 'switch-right', :index => 0).click
   			end
   		end
@@ -170,11 +170,11 @@ class SettingsPage
   	#turn on/off show detailed coding question analysis (excel)
   	def choose_excel_analysis(option)
   		if option == 'yes'
-  			if @browser.div(:class => 'switch-off', :index => 1).exists?
+  			if @browser.div(:class => 'switch has-switch', :index => 1).div(:class => 'switch-off').exists?
   				@browser.span(:class => 'switch-left', :index => 1).click
   			end
   		elsif option == 'no'
-  			if @browser.div(:class => 'switch-on', :index => 1).exists?
+  			if @browser.div(:class => 'switch has-switch', :index => 1).div(:class => 'switch-on').exists?
   				@browser.span(:class => 'switch-right', :index => 1).click
   			end
   		end
@@ -182,11 +182,11 @@ class SettingsPage
   	#turn on/of show candidate feedback (excel)
   	def choose_excel_feedback(option)
   		if option == 'yes'
-  			if @browser.div(:class => 'switch-off', :index => 2).exists?
+  			if @browser.div(:class => 'switch has-switch', :index => 2).div(:class => 'switch-off').exists?
   				@browser.span(:class => 'switch-left', :index => 2).click
   			end
   		elsif option == 'no'
-  			if @browser.div(:class => 'switch-on', :index => 2).exists?
+  			if @browser.div(:class => 'switch has-switch', :index => 2).div(:class => 'switch-on').exists?
   				@browser.span(:class => 'switch-right', :index => 2).click
   			end
   		end
@@ -195,11 +195,11 @@ class SettingsPage
   	#turn on/off show all attempts of questions (pdf)
   	def choose_pdf_attempts(option)
   		if option == 'yes'
-  			if @browser.div(:class => 'switch-off', :index => 3).exists?
+  			if @browser.div(:class => 'switch has-switch', :index => 3).div(:class => 'switch-off').exists?
   				@browser.span(:class => 'switch-left', :index => 3).click
   			end
   		elsif option == 'no'
-  			if @browser.div(:class => 'switch-on', :index => 3).exists?
+  			if @browser.div(:class => 'switch has-switch', :index => 3).div(:class => 'switch-on').exists?
   				@browser.span(:class => 'switch-right', :index => 3).click
   			end
   		end
@@ -208,11 +208,11 @@ class SettingsPage
   	#turn on/off show candidate feedback (pdf)
   	def choose_pdf_output(option)
   		if option == 'yes'
-  			if @browser.div(:class => 'switch-off', :index => 4).exists?
+  			if @browser.div(:class => 'switch has-switch', :index => 4).div(:class => 'switch-off').exists?
   				@browser.span(:class => 'switch-left', :index => 4).click
   			end
   		elsif option == 'no'
-  			if @browser.div(:class => 'switch-on', :index => 4).exists?
+  			if @browser.div(:class => 'switch has-switch', :index => 4).div(:class => 'switch-on').exists?
   				@browser.span(:class => 'switch-right', :index => 4).click
   			end
   		end
@@ -221,11 +221,11 @@ class SettingsPage
   	#turn on/off show output for coding questions (pdf)
   	def choose_pdf_feedback(option)
   		if option == 'yes'
-  			if @browser.div(:class => 'switch-off', :index => 5).exists?
+  			if @browser.div(:class => 'switch has-switch', :index => 5).div(:class => 'switch-off').exists?
   				@browser.span(:class => 'switch-left', :index => 5).click
   			end
   		elsif option == 'no'
-  			if @browser.div(:class => 'switch-on', :index => 5).exists?
+  			if @browser.div(:class => 'switch has-switch', :index => 5).div(:class => 'switch-on').exists?
   				@browser.span(:class => 'switch-right', :index => 5).click
   			end
   		end
@@ -304,7 +304,7 @@ class SettingsPage
   		fail unless @browser.text.include? "Old Password"
   	end
 
-  	#inputs and updates yml file for randomly generated password
+  	#inputs and updates yml file for randomly generated password for login
   	def input_password_data(data = {})
 		p_data = populate_page_with data_for(:password_page, data)
 		self.confirm_password = p_data['new_password']
@@ -315,6 +315,7 @@ class SettingsPage
 
 		d = YAML::load_file(Dir.pwd + file_path["file_name"]) #Load
 		d['password_page']['old_password'] = p_data['new_password'] #Modify
+    d['login_page']['password'] = p_data['new_password'] #Modify
 		File.write(Dir.pwd + file_path["file_name"], d.to_yaml) #Store
 	end
 
